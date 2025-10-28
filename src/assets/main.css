@@ -1,0 +1,1343 @@
+/* Global Styles for Fantasy Trade Calculator - NFL Theme */
+
+/* CSS Custom Properties for Theme Management */
+
+/* DARK THEME (Default) - NFL-Inspired Color Palette */
+:root,
+.dark-theme {
+  /* NFL-Inspired Color Palette */
+  --color-primary-bg: #0B162A;        /* Deep navy base */
+  --color-secondary-bg: #1C1C1C;      /* Dark charcoal alternative */
+  --color-accent-orange: #FF6F00;     /* Bright football orange */
+  --color-accent-green: #2E8B57;      /* Turf green */
+  --color-text-primary: #FFFFFF;      /* White text */
+  --color-text-secondary: #CCCCCC;    /* Subtle grey for labels */
+  --color-text-muted: #999999;        /* Muted text */
+  
+  /* Interactive States */
+  --color-accent-orange-hover: #FF8C00;  /* Brighter orange on hover */
+  --color-accent-orange-active: #E55A00; /* Darker orange when active */
+  --color-accent-green-hover: #3CB371;   /* Brighter green on hover */
+  --color-accent-green-active: #228B22;  /* Darker green when active */
+  
+  /* Surface Colors */
+  --color-surface: rgba(255, 255, 255, 0.05);     /* Subtle white overlay */
+  --color-surface-elevated: rgba(255, 255, 255, 0.1); /* Elevated surfaces */
+  --color-border: rgba(255, 255, 255, 0.1);       /* Subtle borders */
+  --color-border-accent: rgba(255, 111, 0, 0.3);  /* Orange accent borders */
+  
+  /* Shadows */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.5);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-accent-orange) 0%, var(--color-accent-orange-hover) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-accent-green) 0%, var(--color-accent-green-hover) 100%);
+  --gradient-bg: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-secondary-bg) 100%);
+}
+
+/* LIGHT THEME - Clean and Modern */
+.light-theme {
+  /* Light Theme Color Palette */
+  --color-primary-bg: #F5F5F5;        /* Light grey base */
+  --color-secondary-bg: #FFFFFF;      /* Pure white alternative */
+  --color-accent-orange: #FF6F00;     /* Same bright football orange */
+  --color-accent-green: #2E8B57;      /* Same turf green */
+  --color-text-primary: #1C1C1C;      /* Dark text */
+  --color-text-secondary: #666666;    /* Medium grey for labels */
+  --color-text-muted: #999999;        /* Muted text */
+  
+  /* Interactive States (same as dark) */
+  --color-accent-orange-hover: #FF8C00;
+  --color-accent-orange-active: #E55A00;
+  --color-accent-green-hover: #3CB371;
+  --color-accent-green-active: #228B22;
+  
+  /* Surface Colors for Light Theme */
+  --color-surface: rgba(0, 0, 0, 0.02);     /* Subtle dark overlay */
+  --color-surface-elevated: rgba(0, 0, 0, 0.05); /* Elevated surfaces */
+  --color-border: rgba(0, 0, 0, 0.1);       /* Subtle borders */
+  --color-border-accent: rgba(255, 111, 0, 0.3);  /* Orange accent borders */
+  
+  /* Shadows for Light Theme */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
+  
+  /* Gradients (same as dark) */
+  --gradient-primary: linear-gradient(135deg, var(--color-accent-orange) 0%, var(--color-accent-orange-hover) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-accent-green) 0%, var(--color-accent-green-hover) 100%);
+  --gradient-bg: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-secondary-bg) 100%);
+}
+
+/* Common Variables (same for both themes) */
+:root {
+  /* Spacing Scale (Mobile-first) - Compact */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 0.75rem;   /* 12px */
+  --space-lg: 1rem;      /* 16px */
+  --space-xl: 1.5rem;    /* 24px */
+  --space-2xl: 2rem;     /* 32px */
+  --space-3xl: 2.5rem;   /* 40px */
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  
+  /* Typography Scale - Compact */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 0.9rem;  /* 14.4px */
+  --font-size-lg: 1rem;      /* 16px */
+  --font-size-xl: 1.125rem;  /* 18px */
+  --font-size-2xl: 1.25rem;  /* 20px */
+  --font-size-3xl: 1.5rem;   /* 24px */
+  --font-size-4xl: 2rem;     /* 32px */
+  
+  /* Theme Transition Duration */
+  --theme-transition: 0.3s ease;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--gradient-bg);
+  min-height: 100vh;
+  font-size: var(--font-size-base);
+  transition: background-color var(--theme-transition), color var(--theme-transition);
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles - NFL Theme */
+.app-header {
+  background: var(--color-surface-elevated);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--color-border-accent);
+  padding: var(--space-xl) 0;
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  transition: background-color var(--theme-transition), border-color var(--theme-transition);
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.app-header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  position: relative;
+}
+
+.app-header__title {
+  text-align: left;
+  flex: 1;
+}
+
+.app-header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: var(--space-sm);
+  transition: color var(--theme-transition);
+}
+
+.app-header p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  font-weight: 300;
+  transition: color var(--theme-transition);
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--theme-transition);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent-orange);
+  background: var(--color-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-subtle);
+}
+
+.theme-toggle__icon {
+  font-size: var(--font-size-xl);
+  transition: transform var(--theme-transition);
+  display: block;
+}
+
+.theme-toggle:hover .theme-toggle__icon {
+  transform: scale(1.1);
+}
+
+/* Light mode specific styles */
+.theme-toggle--light {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-accent);
+}
+
+.theme-toggle--light:hover {
+  background: var(--color-surface);
+}
+
+/* Mobile-first header adjustments */
+@media (max-width: 768px) {
+  .app-header {
+    padding: var(--space-lg) 0;
+  }
+  
+  .app-header__content {
+    padding: 0 var(--space-md);
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+  
+  .app-header__title {
+    text-align: center;
+  }
+  
+  .app-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .app-header p {
+    font-size: var(--font-size-base);
+  }
+  
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    order: -1;
+  }
+  
+  .theme-toggle__icon {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header__content {
+    padding: 0 var(--space-sm);
+  }
+  
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .theme-toggle__icon {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* Main Content - Mobile-first */
+.app-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  min-height: calc(100vh - 200px); /* Account for header/footer */
+}
+
+/* Calculator Container - NFL Theme (Home Screen) */
+.calculator-container {
+  background: var(--color-surface-elevated);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-strong);
+  border: 2px solid var(--color-border);
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Trade Calculator Container - NFL Theme (Trade Screen) */
+.trade-calculator-container {
+  background: var(--color-surface-elevated);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-strong);
+  border: 2px solid var(--color-border);
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: expandContainer 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Container expansion animation */
+@keyframes expandContainer {
+  0% {
+    max-width: 600px;
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    max-width: 1200px;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.calculator-container::before,
+.trade-calculator-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gradient-primary);
+}
+
+/* Mobile-first container adjustments */
+@media (max-width: 768px) {
+  .app-main {
+    padding: var(--space-sm);
+    align-items: flex-start;
+    padding-top: var(--space-lg);
+  }
+  
+  .calculator-container,
+  .trade-calculator-container {
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    max-width: 100%;
+  }
+  
+  .trade-calculator-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator-container,
+  .trade-calculator-container {
+    padding: var(--space-lg);
+    margin: var(--space-sm);
+  }
+}
+
+/* Calculator Title - NFL Theme - Compact */
+.calculator-title {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.calculator-title h2 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: color var(--theme-transition);
+}
+
+.calculator-title p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  transition: color var(--theme-transition);
+}
+
+/* Mobile title adjustments */
+@media (max-width: 768px) {
+  .calculator-title h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .calculator-title p {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Form Styles - NFL Theme - Compact */
+.calculator-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color var(--theme-transition);
+}
+
+.form-group select {
+  padding: var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: all var(--theme-transition);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-accent-orange);
+  box-shadow: 0 0 0 3px var(--color-border-accent);
+  background: var(--color-surface-elevated);
+}
+
+.form-group select:hover {
+  border-color: var(--color-accent-orange-hover);
+  background: var(--color-surface-elevated);
+}
+
+.form-group select option {
+  background: var(--color-primary-bg);
+  color: var(--color-text-primary);
+  padding: var(--space-sm);
+}
+
+/* Mobile form adjustments */
+@media (max-width: 768px) {
+  .calculator-form {
+    gap: var(--space-lg);
+  }
+  
+  .form-group select {
+    padding: var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+  
+  .form-group label {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Button Styles - NFL Theme - Compact */
+.continue-button {
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+  border: none;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: var(--space-md);
+  box-shadow: var(--shadow-medium);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.continue-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.continue-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+  background: linear-gradient(135deg, var(--color-accent-orange-hover) 0%, var(--color-accent-orange) 100%);
+}
+
+.continue-button:hover::before {
+  left: 100%;
+}
+
+.continue-button:active {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.continue-button:disabled {
+  background: var(--color-text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.continue-button:disabled::before {
+  display: none;
+}
+
+/* Mobile button adjustments */
+@media (max-width: 768px) {
+  .continue-button {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-base);
+    margin-top: var(--space-md);
+  }
+}
+
+/* Footer - NFL Theme */
+.app-footer {
+  background: var(--color-surface-elevated);
+  backdrop-filter: blur(20px);
+  border-top: 2px solid var(--color-border);
+  padding: var(--space-lg);
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  position: relative;
+  transition: background-color var(--theme-transition), border-color var(--theme-transition), color var(--theme-transition);
+}
+
+.app-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-secondary);
+}
+
+/* Mobile footer adjustments */
+@media (max-width: 768px) {
+  .app-footer {
+    padding: var(--space-md);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Additional Mobile-First Responsive Design */
+@media (max-width: 1024px) {
+  .calculator-container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-main {
+    padding: var(--space-xs);
+    padding-top: var(--space-md);
+  }
+  
+  .calculator-container {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+  
+  .calculator-title {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .calculator-form {
+    gap: var(--space-md);
+  }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .app-header h1,
+  .calculator-title h2 {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Utility Classes - Using CSS Variables */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.bg-primary {
+  background: var(--color-primary-bg);
+}
+
+.bg-secondary {
+  background: var(--color-secondary-bg);
+}
+
+.bg-surface {
+  background: var(--color-surface);
+}
+
+.bg-surface-elevated {
+  background: var(--color-surface-elevated);
+}
+
+/* Spacing Utilities */
+.mb-xs { margin-bottom: var(--space-xs); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.mb-2xl { margin-bottom: var(--space-2xl); }
+
+.mt-xs { margin-top: var(--space-xs); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mt-2xl { margin-top: var(--space-2xl); }
+
+.p-xs { padding: var(--space-xs); }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+.p-2xl { padding: var(--space-2xl); }
+
+/* Border Radius Utilities */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+
+/* Shadow Utilities */
+.shadow-subtle { box-shadow: var(--shadow-subtle); }
+.shadow-medium { box-shadow: var(--shadow-medium); }
+.shadow-strong { box-shadow: var(--shadow-strong); }
+
+/* Trade View Styles - Redesigned for Clean, Modern Look */
+.trade-view {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Trade Header - Clean and Centered - Compact */
+.trade-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md) 0;
+  position: relative;
+}
+
+.trade-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+}
+
+.back-button {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--theme-transition);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-subtle);
+  min-width: 70px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.back-button:hover {
+  border-color: var(--color-accent-orange);
+  background: var(--color-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  color: var(--color-accent-orange);
+}
+
+.back-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-subtle);
+}
+
+.trade-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-align: center;
+  flex: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: color var(--theme-transition);
+}
+
+/* Trade Content - Clean Grid Layout - Compact */
+.trade-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  flex: 1;
+  align-items: start;
+  width: 100%;
+}
+
+/* Team Section - Sleeker Card Design - Compact */
+.team-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-medium);
+  transition: all var(--theme-transition);
+  position: relative;
+  overflow: hidden;
+  min-height: 350px;
+  width: 100%;
+}
+
+.team-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.team-section:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+  border-color: var(--color-border-accent);
+}
+
+.team-title {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  transition: color var(--theme-transition);
+  position: relative;
+}
+
+.team-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: var(--color-accent-orange);
+  border-radius: 1px;
+}
+
+/* Search Container - Full Width and Distinct - Compact */
+.search-container {
+  margin-bottom: var(--space-md);
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-primary);
+  transition: all var(--theme-transition);
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+  box-shadow: var(--shadow-subtle);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-accent-orange);
+  box-shadow: 0 0 0 3px var(--color-border-accent);
+  background: var(--color-surface);
+  transform: translateY(-1px);
+}
+
+.search-input:hover {
+  border-color: var(--color-accent-orange-hover);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-medium);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Search Dropdown Styles */
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-primary-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-strong);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: var(--space-xs);
+}
+
+.search-dropdown.no-results,
+.search-dropdown.loading {
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.no-results-message,
+.loading-message {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+.loading-message {
+  color: var(--color-accent-orange);
+}
+
+/* Search Result Items */
+.search-result-item {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--theme-transition);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: var(--color-surface);
+  border-color: var(--color-accent-orange);
+}
+
+.search-result-item:active {
+  background: var(--color-surface-elevated);
+  transform: translateY(1px);
+}
+
+/* Player Headshot Styles */
+.player-headshot {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--theme-transition);
+}
+
+.player-headshot:hover {
+  border-color: var(--color-accent-orange);
+  transform: scale(1.05);
+}
+
+.headshot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all var(--theme-transition);
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.player-name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  transition: color var(--theme-transition);
+}
+
+.player-details {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  transition: color var(--theme-transition);
+}
+
+/* Players Container - Clean Placeholder Design - Compact */
+.players-container {
+  min-height: 180px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.players-placeholder {
+  text-align: center;
+  padding: var(--space-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder-text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+  transition: color var(--theme-transition);
+  opacity: 0.8;
+}
+
+.placeholder-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  min-height: 120px;
+}
+
+.player-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  transition: all var(--theme-transition);
+  backdrop-filter: blur(5px);
+  box-shadow: var(--shadow-subtle);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.player-item:hover {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-accent-orange);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.player-item .player-headshot {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--theme-transition);
+}
+
+.player-item .player-headshot:hover {
+  border-color: var(--color-accent-orange);
+  transform: scale(1.05);
+}
+
+.player-item .headshot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all var(--theme-transition);
+}
+
+.player-item .player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.player-item .player-name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  transition: color var(--theme-transition);
+}
+
+.player-item .player-details {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  transition: color var(--theme-transition);
+}
+
+/* Remove Player Button */
+.remove-player-btn {
+  background: var(--color-accent-orange);
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  transition: all var(--theme-transition);
+  box-shadow: var(--shadow-subtle);
+  flex-shrink: 0;
+}
+
+.remove-player-btn:hover {
+  background: var(--color-accent-orange-hover);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-medium);
+}
+
+.remove-player-btn:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 480px) {
+  .trade-view {
+    padding: var(--space-md);
+    min-height: calc(100vh - 150px);
+  }
+  
+  .trade-header {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg) 0;
+  }
+  
+  .back-button {
+    order: -1;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-xs);
+    min-width: 60px;
+  }
+  
+  .trade-title {
+    font-size: var(--font-size-xl);
+    text-align: center;
+  }
+  
+  .team-section {
+    padding: var(--space-lg);
+    min-height: 400px;
+  }
+  
+  .team-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-lg);
+    letter-spacing: 1px;
+  }
+  
+  .search-input {
+    padding: var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+  
+  .players-container {
+    min-height: 250px;
+  }
+  
+  .players-placeholder {
+    padding: var(--space-lg);
+  }
+  
+  .placeholder-text {
+    font-size: var(--font-size-sm);
+  }
+  
+  .search-dropdown {
+    max-height: 200px;
+  }
+  
+  .search-result-item {
+    padding: var(--space-sm);
+  }
+  
+  .player-name {
+    font-size: var(--font-size-xs);
+  }
+  
+  .player-details {
+    font-size: 0.7rem;
+  }
+  
+  .remove-player-btn {
+    width: 20px;
+    height: 20px;
+    font-size: var(--font-size-xs);
+  }
+  
+  .player-headshot {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .player-item .player-headshot {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .trade-view {
+    padding: var(--space-lg);
+  }
+  
+  .trade-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2xl);
+  }
+  
+  .back-button {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+  
+  .trade-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .team-section {
+    padding: var(--space-xl);
+    min-height: 450px;
+  }
+  
+  .team-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .search-input {
+    padding: var(--space-lg);
+  }
+  
+  .players-container {
+    min-height: 280px;
+  }
+}
+
+@media (min-width: 769px) {
+  .trade-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+    width: 100%;
+  }
+  
+  .team-section {
+    min-height: 400px;
+    width: 100%;
+  }
+  
+  .trade-view {
+    padding: var(--space-lg);
+    max-width: 1600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .trade-content {
+    gap: var(--space-2xl);
+    width: 100%;
+  }
+  
+  .team-section {
+    padding: var(--space-xl);
+    min-height: 450px;
+    width: 100%;
+  }
+  
+  .team-section:hover {
+    transform: translateY(-2px);
+  }
+  
+  .trade-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .trade-view {
+    max-width: 1800px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .trade-view {
+    max-width: 2000px;
+    padding: var(--space-xl);
+  }
+  
+  .trade-content {
+    gap: var(--space-2xl);
+    width: 100%;
+  }
+  
+  .team-section {
+    min-height: 500px;
+    width: 100%;
+  }
+}
+
+/* Additional responsive adjustments for trade calculator */
+@media (min-width: 769px) {
+  .trade-calculator-container {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .trade-calculator-container {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .trade-calculator-container {
+    max-width: 1400px;
+  }
+}
+
+/* 
+  THEME CUSTOMIZATION NOTES:
+  
+  To adjust the NFL theme colors, modify the CSS custom properties in the :root selectors above:
+  
+  DARK THEME VARIABLES (lines 6-38):
+  - Change --color-primary-bg for the main background
+  - Change --color-accent-orange for the primary accent color
+  - Change --color-accent-green for the secondary accent color
+  - Adjust --color-text-primary and --color-text-secondary for text colors
+  - Modify gradients by updating --gradient-primary and --gradient-secondary
+  
+  LIGHT THEME VARIABLES (lines 41-72):
+  - Change --color-primary-bg for the light background
+  - Adjust --color-text-primary and --color-text-secondary for light mode text
+  - Modify surface colors for light mode surfaces
+  - Update shadows for light mode depth
+  
+  All components automatically use these variables, so changes will be applied globally.
+  
+  THEME TOGGLE FUNCTIONALITY:
+  - The theme toggle button switches between .dark-theme and .light-theme classes
+  - Theme preference is saved in localStorage as 'fantasy-calc-theme'
+  - Smooth transitions are applied using --theme-transition variable
+  - All color changes are animated for a polished user experience
+  
+  For additional theme variations, you can create alternative color schemes by:
+  1. Adding new theme classes (e.g., .blue-theme, .green-theme)
+  2. Updating the useTheme composable to support more themes
+  3. Or creating CSS custom property overrides for specific sections
+*/
