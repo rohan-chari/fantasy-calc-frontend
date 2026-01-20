@@ -64,11 +64,13 @@ const fetchTrending = async () => {
     const response = await fetch('/api/trending?limit=20')
     const data = await response.json()
 
-    if (data.trending) {
+    if (data.error) {
+      console.error('Failed to fetch trending:', data.error)
+      trendingError.value = data.error
+    } else if (data.trending && data.trending.length > 0) {
       trendingData.value = data
     } else {
-      console.error('Failed to fetch trending:', data)
-      trendingError.value = 'Failed to load trending'
+      trendingError.value = 'No trending data available'
     }
   } catch (error) {
     console.error('Error fetching trending:', error)
