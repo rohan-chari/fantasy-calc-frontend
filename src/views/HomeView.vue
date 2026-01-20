@@ -23,11 +23,11 @@ import { ref, onMounted } from 'vue'
 import CalculatorForm from '../components/CalculatorForm.vue'
 
 // Trending data state
-const trendingPlayers = ref([])
+const trendingData = ref(null)
 const isLoadingTrending = ref(false)
 const trendingError = ref(null)
 
-// Fetch trending players
+// Fetch trending tickers
 const fetchTrending = async () => {
   isLoadingTrending.value = true
   trendingError.value = null
@@ -36,15 +36,15 @@ const fetchTrending = async () => {
     const response = await fetch('/api/trending?limit=20')
     const data = await response.json()
 
-    if (data.success) {
-      trendingPlayers.value = data.data
+    if (data.trending) {
+      trendingData.value = data
     } else {
       console.error('Failed to fetch trending:', data)
-      trendingError.value = 'Failed to load trending players'
+      trendingError.value = 'Failed to load trending'
     }
   } catch (error) {
     console.error('Error fetching trending:', error)
-    trendingError.value = 'Failed to load trending players'
+    trendingError.value = 'Failed to load trending'
   } finally {
     isLoadingTrending.value = false
   }
