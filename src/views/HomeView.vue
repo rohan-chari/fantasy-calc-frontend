@@ -19,12 +19,39 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import CalculatorForm from '../components/CalculatorForm.vue'
 
-// This is the main calculator view
-// Add any view-specific logic here:
-// - Data fetching for league settings
-// - User authentication state
-// - Navigation between calculator steps
-// - Global state management
+// Trending data state
+const trendingPlayers = ref([])
+const isLoadingTrending = ref(false)
+const trendingError = ref(null)
+
+// Fetch trending players
+const fetchTrending = async () => {
+  isLoadingTrending.value = true
+  trendingError.value = null
+
+  try {
+    const response = await fetch('/api/trending?limit=20')
+    const data = await response.json()
+
+    if (data.success) {
+      trendingPlayers.value = data.data
+    } else {
+      console.error('Failed to fetch trending:', data)
+      trendingError.value = 'Failed to load trending players'
+    }
+  } catch (error) {
+    console.error('Error fetching trending:', error)
+    trendingError.value = 'Failed to load trending players'
+  } finally {
+    isLoadingTrending.value = false
+  }
+}
+
+// Fetch trending on mount
+onMounted(() => {
+  fetchTrending()
+})
 </script>
